@@ -2,6 +2,9 @@
   "name": "ng-astro-course",
   "type": "module",
   "version": "0.0.1",
+  "browserslist": [
+    "defaults"
+  ],
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
@@ -10,8 +13,16 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^4.9.1",
     "@astrojs/check": "^0.7.0",
+    "@iconify-json/ic": "^1.1.17",
+    "@iconify-json/mdi": "^1.1.66",
+    "astro": "^4.9.1",
+    "astro-icon": "^1.1.0",
+    "postcss": "^8.4.38",
+    "postcss-preset-env": "^9.5.14",
     "typescript": "^5.4.5"
+  },
+  "devDependencies": {
+    "sass": "^1.77.2"
   }
 }
