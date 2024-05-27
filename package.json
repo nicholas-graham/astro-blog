@@ -14,8 +14,10 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.7.0",
+    "@astrojs/mdx": "^3.0.1",
     "@iconify-json/ic": "^1.1.17",
     "@iconify-json/mdi": "^1.1.66",
+    "@iconify-json/tabler": "^1.1.113",
     "astro": "^4.9.1",
     "astro-icon": "^1.1.0",
     "postcss": "^8.4.38",
