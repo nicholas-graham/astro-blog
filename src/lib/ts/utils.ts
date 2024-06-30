@@ -1,3 +1,6 @@
+import type { FormatPostOpts } from "../shared/types/FormatPostOpts";
+import type { Post } from "../shared/types/post";
+
 export const slugify = (...args: string[]): string => {
     const value = args.join(' ')
 
@@ -25,4 +28,37 @@ export function getImage(imageSrc: string) {
         );
 
     return images[imageSrc]();
+}
+
+export function formatBlogPosts(posts: Post[], formatPostOpts: FormatPostOpts = {
+    filterOutDrafts: true,
+    filterOutFuturePosts: true,
+    sortByDate: true,
+    limit: undefined
+}) {
+    const filteredPosts = posts.reduce((acc: Post[], post) => {
+        // filter out drafts if true
+        if (formatPostOpts.filterOutDrafts && post.frontmatter.draft) return acc;
+
+        // filterOutFuturePosts if true
+        if (formatPostOpts.filterOutFuturePosts && new Date(post.frontmatter.date) > new Date()) return acc;
+
+        // add post to acc
+        acc.push(post);
+
+        return acc;
+    }, [])
+
+    // sortByDate or randomize
+    if (formatPostOpts.sortByDate) {
+        filteredPosts.sort((a) => new Date(a.frontmatter.date).getDate()).reverse()
+    } else {
+        filteredPosts.sort(() => Math.random() - 0.5)
+    }
+
+    // limit if number is passed
+    if (formatPostOpts.limit) {
+        return filteredPosts.slice(0, formatPostOpts.limit)
+    }
+    return filteredPosts;
 }
