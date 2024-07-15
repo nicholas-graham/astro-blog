@@ -1,0 +1,33 @@
+---
+import type { Post } from "../lib/shared/types/Post";
+import { formatBlogPosts, slugify } from "../lib/ts/utils";
+
+const allPosts = (await Astro.glob("../pages/blog/*.md")) as Post[];
+const formattedPosts = formatBlogPosts(allPosts);
+const allCategories = formattedPosts
+    .map((cat) => cat.frontmatter.category.toLowerCase())
+    .flat();
+
+const processedCats = allCategories.reduce((acc: any, category) => {
+    // check if the cat exists in the acc
+    const value = acc[category] || 0;
+    return {
+        ...acc,
+        [category]: value + 1,
+    };
+}, {});
+
+const { showCount } = Astro.props;
+---
+
+<ul class="categories">
+    {
+        Object.entries(processedCats).map(([key, val]) => (
+            <li>
+                <a class="badge" href={`/category/${slugify(key)}/`}>
+                    {key} {showCount && `(${val})`}
+                </a>
+            </li>
+        ))
+    }
+</ul>

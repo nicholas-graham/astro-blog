@@ -8,13 +8,14 @@ import Pagination from "../../components/Pagination.astro";
 
 // utils imports
 import { formatBlogPosts } from "../../lib/ts/utils";
+import CategoryCloud from "../../components/CategoryCloud.astro";
 
 export const getStaticPaths = (async ({ paginate }) => {
     const allPosts = (await Astro.glob("./*.md")) as Post[];
     const formattedPosts = formatBlogPosts(allPosts);
 
     return paginate(formattedPosts, {
-        pageSize: 2,
+        pageSize: 3,
     });
 }) satisfies GetStaticPaths;
 
@@ -37,4 +38,8 @@ const { page } = Astro.props;
         </div>
         <Pagination prevUrl={page.url.prev} nextUrl={page.url.next} />
     </section>
+    <aside class="container" aria-label="Blog categories">
+        <h2 class="h3">Blog Categories</h2>
+        <CategoryCloud showCount={true} />
+    </aside>
 </MainLayout>
