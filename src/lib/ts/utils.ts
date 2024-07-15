@@ -1,5 +1,5 @@
 import type { FormatPostOpts } from "../shared/types/FormatPostOpts";
-import type { Post } from "../shared/types/post";
+import type { Post } from "../shared/types/Post";
 
 export const slugify = (...args: string[]): string => {
     const value = args.join(' ')

@@ -8,8 +8,9 @@ import AstroLink from "../components/AstroLink.astro";
 import "../styles/global.css";
 
 import { formatBlogPosts } from "../lib/ts/utils";
+import type { Post } from "../lib/shared/types/Post";
 
-const allPosts = await Astro.glob("./blog/*.md");
+const allPosts = (await Astro.glob("./blog/*.md")) as Post[];
 const formattedPosts = formatBlogPosts(allPosts, { limit: 3 });
 ---
 

@@ -1,5 +1,6 @@
 export interface Post {
     frontmatter: Frontmatter;
+    url: string;
 }
 
 interface Frontmatter {
@@ -10,6 +11,7 @@ interface Frontmatter {
     description: string;
     draft: boolean;
     category: string;
+    author: string;
 }
 
 interface Image {
